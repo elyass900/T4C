@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T4C — الیاس</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body, html{height:auto;font-family:'Roboto',sans-serif;background:#071327;color:#eaf6f4;overflow-x:hidden;scroll-behavior:smooth;}
+a{text-decoration:none;color:inherit;}
+
+/* Matrix Background */
+canvas#matrix{
+  position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;
+}
+
+/* Header */
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 32px;backdrop-filter:blur(6px);background:rgba(0,0,0,0.4);border-bottom:1px solid rgba(255,255,255,0.05);position:sticky;top:0;z-index:10;}
+.logo{display:flex;align-items:center;gap:12px;}
+.logo img{width:50px;height:50px;border-radius:10px;}
+.brand{display:flex;flex-direction:column;}
+.brand .title{color:#1abc9c;font-weight:700;font-size:18px;}
+.brand .sub{color:#b7cbd3;font-size:12px;}
+
+/* Main container */
+main{padding:60px 20px;display:flex;justify-content:center;}
+.container{max-width:1200px;width:100%;display:grid;grid-template-columns:360px 1fr;gap:32px;}
+@media(max-width:900px){.container{grid-template-columns:1fr;} header{flex-direction:column;gap:12px;}}
+
+/* Instructor Card */
+.card{background:rgba(255,255,255,0.05);backdrop-filter:blur(6px);padding:20px;border-radius:16px;border:1px solid rgba(255,255,255,0.05);box-shadow:0 8px 24px rgba(0,0,0,0.6);}
+.avatar{text-align:center;margin-bottom:16px;}
+.avatar img{width:160px;height:160px;border-radius:20px;border:3px solid rgba(255,255,255,0.05);object-fit:cover;transition:0.4s;transform:scale(1);}
+.avatar img:hover{transform:scale(1.05);}
+.instructor-name{text-align:center;font-size:22px;font-weight:700;margin-bottom:6px;}
+.instructor-role{text-align:center;color:#b7cbd3;font-size:14px;margin-bottom:12px;}
+.bio{text-align:center;color:#b7cbd3;font-size:14px;line-height:1.6;margin-bottom:14px;}
+.contact-btn{display:flex;align-items:center;justify-content:center;margin:auto;padding:10px 16px;border-radius:12px;background:linear-gradient(90deg,#1abc9c,#16a085);color:#04293a;font-weight:700;cursor:pointer;transition:0.3s;}
+.contact-btn:hover{opacity:0.85;}
+
+/* Right Content */
+.right{display:flex;flex-direction:column;gap:40px;}
+.hero{padding:30px;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);}
+.hero h2{color:#1abc9c;font-size:28px;margin-bottom:16px;}
+.hero p{color:#b7cbd3;font-size:15px;line-height:1.6;margin-bottom:20px;}
+
+/* Features / Skills Section */
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+@media(max-width:700px){.features{grid-template-columns:1fr;}}
+.feature{background:rgba(255,255,255,0.04);padding:20px;border-radius:16px;border:1px solid rgba(255,255,255,0.05);cursor:pointer;text-align:center;opacity:0;transform:translateY(30px);transition:all 0.6s;}
+.feature.visible{opacity:1;transform:translateY(0);}
+.feature img{width:64px;height:64px;margin-bottom:12px;transition:0.4s;}
+.feature:hover img{transform:scale(1.2);}
+.feature h4{color:#1abc9c;font-size:16px;margin-bottom:8px;}
+.feature p{color:#b7cbd3;font-size:14px;line-height:1.5;}
+
+/* Footer */
+footer{text-align:center;color:#b7cbd3;font-size:13px;margin-top:32px;}
+</style>
+</head>
+<body>
+
+<canvas id="matrix"></canvas>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="T4C Logo">
+    <div class="brand">
+      <div class="title">T4C — الیاس</div>
+      <div class="sub">تیم قانونی سایبری و هوش مصنوعی</div>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="container">
+  <!-- Left: Instructor Card -->
+  <aside class="card">
+    <div class="avatar">
+      <img src="ely.png" alt="Elyass">
+    </div>
+    <div class="instructor-name">الیاس</div>
+    <div class="instructor-role">مدرس — T4C</div>
+    <div class="bio">سلام! من الیاس هستم — مدرس برنامه‌نویسی، امنیت سایبری و هوش مصنوعی. با من پروژه بسازید و مهارت‌های عملی یاد بگیرید.</div>
+    <a class="contact-btn" href="https://api.whatsapp.com/send?phone=0765238035&text=سلام! سوال دارم دربارهٔ کامپیوتر." target="_blank">📱 تماس در واتساپ</a>
+  </aside>
+
+  <!-- Right: Hero + Features -->
+  <section class="right">
+    <div class="hero card">
+      <h2>خوش آمدی به T4C</h2>
+      <p>در T4C ما آموزش، پژوهش و دفاع سایبری را با احترام به قوانین و اخلاق ترکیب می‌کنیم. بیایید با هم یاد بگیریم و بسازیم.</p>
+
+      <div class="features">
+        <div class="feature"><img src="programming.png" alt="Programming"><h4>برنامه‌نویسی</h4><p>پایتون، وب، SQL و پروژه‌های عملی واقعی.</p></div>
+        <div class="feature"><img src="security.png" alt="Security"><h4>امنیت سایبری</h4><p>هک اخلاقی، آزمایشگاه امن و شبکه.</p></div>
+        <div class="feature"><img src="ai.png" alt="AI"><h4>هوش مصنوعی</h4><p>Machine Learning و پروژه‌های عملی با پایتون.</p></div>
+        <div class="feature"><img src="community.png" alt="Community"><h4>جامعه</h4><p>چالش‌ها، کارگاه‌ها و همکاری در پروژه‌ها.</p></div>
+      </div>
+    </div>
+    <footer>© <span id="year"></span> T4C — فعالیت‌ها کاملاً قانونی و آموزشی</footer>
+  </section>
+</div>
+</main>
+
+<script>
+/* Matrix Background */
+const canvas=document.getElementById('matrix');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+const letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+const fontSize=16;
+const columns=canvas.width/fontSize;
+const drops=[];
+for(let x=0;x<columns;x++){drops[x]=1;}
+function draw(){
+  ctx.fillStyle="rgba(0,0,0,0.05)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="#1abc9c";
+  ctx.font=fontSize+"px monospace";
+  for(let i=0;i<drops.length;i++){
+    const text=letters.charAt(Math.floor(Math.random()*letters.length));
+    ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+    if(drops[i]*fontSize>canvas.height && Math.random()>0.975){drops[i]=0;}
+    drops[i]++;
+  }
+}
+setInterval(draw,35);
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
+/* Scroll Animation */
+const features=document.querySelectorAll('.feature');
+function checkFeatures(){
+  const triggerBottom=window.innerHeight*0.85;
+  features.forEach(f=>{
+    const top=f.getBoundingClientRect().top;
+    if(top<triggerBottom){f.classList.add('visible');}
+  });
+}
+window.addEventListener('scroll',checkFeatures);
+checkFeatures();
+
+/* Footer year */
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
